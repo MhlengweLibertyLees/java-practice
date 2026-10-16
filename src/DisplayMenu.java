@@ -2,9 +2,30 @@
 import java.util.Scanner;
 
 public class DisplayMenu {
+
+    private static void printMenu() {
+        System.out.print("""
+               Calculator Menu
+               1. Add
+               2. Subtract
+               3. Multiply
+               4. Divide
+               5. Exit Calculator
+               Choose option:
+               """);
+    }
+
+    private static int[] promptUserForTwoNumbers(Scanner input) {
+        System.out.print("Enter first number :");
+        int num1 = input.nextInt();
+        System.out.print("Enter second number :");
+        int num2 = input.nextInt();
+
+        return new int[]{num1,num2};
+    }
+
     public static void main(String[] args){
 
-        int num1,num2;
         int sum;
         int subtract;
         int multiply;
@@ -12,78 +33,52 @@ public class DisplayMenu {
 
         Scanner input = new Scanner(System.in);
 
-        System.out.print("""
-                Calculator Menu
-                1.Add
-                2.Subtract
-                3.Multiply
-                4.divide
-                5.Exit Calculator
-                Choose option :
-                """);
-
+        //call menu method
+        printMenu();
         int option = input.nextInt();
+        int[] numbersInput;
 
         while(true){
-
             switch(option){
                 case 1:
-                    System.out.print("Enter first number :");
-                    num1 = input.nextInt();
-                    System.out.print("Enter second number :");
-                    num2 = input.nextInt();
+                    numbersInput = promptUserForTwoNumbers(input);
+                    sum = numbersInput[0] + numbersInput[1];
 
-                    sum = num1 + num2;
-                    System.out.println("Answer:" + num1 + " + " + num2 + " = " +sum);
+                    System.out.println("Answer:" + numbersInput[0] + " + " + numbersInput[1] + " = " +sum);
                     break;
                 case 2:
-                    System.out.print("Enter first number :");
-                    num1 = input.nextInt();
-                    System.out.print("Enter second number :");
-                    num2 = input.nextInt();
+                    numbersInput = promptUserForTwoNumbers(input);
+                    subtract = numbersInput[0] - numbersInput[1];
 
-                    subtract = num1 - num2;
-                    System.out.println("Answer:" + num1 + " - " + num2 + " = " +subtract);
+                    System.out.println("Answer:" + numbersInput[0] + " - " + numbersInput[1] + " = " +subtract);
                     break;
                 case 3:
-                    System.out.print("Enter first number :");
-                    num1 = input.nextInt();
-                    System.out.print("Enter second number :");
-                    num2 = input.nextInt();
+                    numbersInput = promptUserForTwoNumbers(input);
+                    multiply = numbersInput[0] * numbersInput[1];
 
-                    multiply = num1 * num2;
-                    System.out.println("Answer:" + num1 + " x " + num2 + " = " +multiply);
+                    System.out.println("Answer:" + numbersInput[0] + " x " + numbersInput[1] + " = " +multiply);
                     break;
                 case 4:
-                    System.out.print("Enter first number :");
-                    num1 = input.nextInt();
-                    System.out.print("Enter second number :");
-                    num2 = input.nextInt();
+                    numbersInput = promptUserForTwoNumbers(input);
 
-                    if(num2 != 0){
-                        divide = (double)num1 / num2;
-                        System.out.println("Answer:" + num1 + " ÷ " + num2 + " = " +divide);
+                    if(numbersInput[1] != 0){
+                        divide = (double)numbersInput[0] / numbersInput[1];
+                        System.out.println("Answer:" + numbersInput[0] + " ÷ " + numbersInput[1] + " = " +divide);
                     }else{
                         System.out.println("Cannot divide a number by zero");
                     }
+                    break;
                 case 5:
                     System.out.println("You are done using Calculator. Goodbye!");
                     input.close();
                     return;
                 default:
-                    System.out.println("Invalid option! Choose between 1 and 4.");
+                    System.out.println("Invalid option! Choose between 1 and 5.");
                     break;
 
             }
 
-            System.out.print("""
-                Calculator Menu
-                1.Add
-                2.Subtract
-                3.Multiply
-                4.divide
-                Choose option :
-                """);
+            printMenu();
             option = input.nextInt();
         }
 
